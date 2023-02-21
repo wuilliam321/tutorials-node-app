@@ -1,6 +1,20 @@
 version: '3.3'
 services:
-  db:
+  mysql-test:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'tutorials'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3307:3306'
+    expose:
+      - '3307'
+    volumes:
+      - mysql-test:/var/lib/mysql
+  mysql-prod:
     image: mysql:5.7
     restart: always
     environment:
@@ -13,7 +27,8 @@ services:
     expose:
       - '3306'
     volumes:
-      - tutorials-db:/var/lib/mysql
+      - mysql-prod:/var/lib/mysql
 volumes:
-  tutorials-db:
+  mysql-test:
+  mysql-prod:
 

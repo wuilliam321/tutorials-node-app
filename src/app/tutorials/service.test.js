@@ -28,7 +28,7 @@ describe("Tutorials Services", () => {
                 publishedStatus: false,
             });
             const expected = new Tutorial({
-                id: "1",
+                id: "1", // hardcoded id
                 title: "Test title",
                 publishedStatus: false,
             });

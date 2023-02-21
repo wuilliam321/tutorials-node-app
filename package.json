@@ -11,9 +11,10 @@
     "author": "Wuilliam Lacruz <wuilliam321@gmail.com>",
     "license": "MIT",
     "scripts": {
-        "build": "rimraf dist && babel src -d dist",
+        "build": "rimraf dist && babel src -d dist --ignore '**/*.test.js'",
         "dev": "node ./dist/index",
-        "test": "jest",
+        "test": "NODE_ENV=test jest -u --testNamePattern='^(?!.*integration.*).*$'",
+        "test:integration": "NODE_ENV=test yarn db-migrate:down && NODE_ENV=test yarn db-migrate:up && NODE_ENV=test jest -u -t=integration",
         "db-migrate:up": "sequelize-cli db:migrate",
         "db-migrate:down": "sequelize-cli db:migrate:undo"
     },
@@ -23,6 +24,7 @@
         "@babel/preset-env": "^7.20.2",
         "@types/jest": "^29.4.0",
         "babel-jest": "^29.4.3",
+        "babel-register": "^6.26.0",
         "eslint": "^8.34.0",
         "jest": "^29.4.3",
         "prettier": "^2.8.4",
