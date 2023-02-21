@@ -1,5 +1,6 @@
 import { Tutorial } from "./tutorial";
 import { TutorialsService } from "./service";
+import { BadRequestError, InternalServerError } from "../shared/errors";
 
 // Repository mock - we don't need to implement this now
 const tutorialsRepositoryMock = {
@@ -14,7 +15,7 @@ const tutorialsRepositoryMock = {
 // Repository mock (failing one) - we don't need to implement this now
 const tutorialsRepositoryFailingMock = {
     save: () => {
-        throw new Error();
+        throw new InternalServerError();
     },
 };
 
@@ -38,8 +39,7 @@ describe("Tutorials Services", () => {
         it("should should fail on invalid tutorial", () => {
             const service = new TutorialsService(tutorialsRepositoryMock);
             const tutorial = new Tutorial({});
-            const result = service.create(tutorial);
-            expect(result).toBe(false);
+            expect(() => service.create(tutorial)).toThrow(BadRequestError);
         });
 
         it("should should fail on repo error", () => {
@@ -50,7 +50,7 @@ describe("Tutorials Services", () => {
                 title: "Test title",
                 publishedStatus: false,
             });
-            expect(() => service.create(tutorial)).toThrowError();
+            expect(() => service.create(tutorial)).toThrow(InternalServerError);
         });
     });
 });

@@ -1,3 +1,5 @@
+import { BadRequestError } from "../shared/errors";
+
 export class TutorialsService {
     constructor(tutorialsRepo) {
         this.tutorialsRepo = tutorialsRepo;
@@ -6,7 +8,7 @@ export class TutorialsService {
     create(tutorial) {
         try {
             if (!tutorial.isValid()) {
-                return false;
+                throw new BadRequestError("Invalid error");
             }
 
             const result = this.tutorialsRepo.save(tutorial);
