@@ -1,18 +1,16 @@
-import { BadRequestError } from "../shared/errors";
+import { IvalidParamsError } from "../shared/errors";
 
 export class TutorialsService {
     constructor(tutorialsRepo) {
         this.tutorialsRepo = tutorialsRepo;
     }
 
-    create(tutorial) {
+    async create(tutorial) {
         try {
             if (!tutorial.isValid()) {
-                throw new BadRequestError("Invalid error");
+                throw new IvalidParamsError("Invalid error");
             }
-
-            const result = this.tutorialsRepo.save(tutorial);
-            return result;
+            return await this.tutorialsRepo.save(tutorial);
         } catch (err) {
             throw err;
         }

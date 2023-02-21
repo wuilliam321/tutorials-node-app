@@ -1,13 +1,13 @@
-export class BadRequestError extends Error {
+export class IvalidParamsError extends Error {
     constructor(message) {
         super(message);
-        this.name = "BadRequestError";
+        this.name = "IvalidParamsError";
     }
 }
 
-export class InternalServerError extends Error {
+export class ServerError extends Error {
     constructor(message) {
         super(message);
-        this.name = "InternalServerError";
+        this.name = "ServerError";
     }
 }

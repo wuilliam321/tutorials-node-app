@@ -1,10 +1,10 @@
 import { Tutorial } from "./tutorial";
 import { TutorialsService } from "./service";
-import { BadRequestError, InternalServerError } from "../shared/errors";
+import { IvalidParamsError, ServerError } from "../shared/errors";
 
 // Repository mock - we don't need to implement this now
 const tutorialsRepositoryMock = {
-    save: () =>
+    save: async () =>
         new Tutorial({
             id: "1",
             title: "Test title",
@@ -14,14 +14,14 @@ const tutorialsRepositoryMock = {
 
 // Repository mock (failing one) - we don't need to implement this now
 const tutorialsRepositoryFailingMock = {
-    save: () => {
-        throw new InternalServerError();
+    save: async () => {
+        throw new ServerError("");
     },
 };
 
 describe("Tutorials Services", () => {
     describe("create", () => {
-        it("should create a new tutorial", () => {
+        it("should create a new tutorial", async () => {
             const service = new TutorialsService(tutorialsRepositoryMock);
             const tutorial = new Tutorial({
                 title: "Test title",
@@ -32,14 +32,16 @@ describe("Tutorials Services", () => {
                 title: "Test title",
                 publishedStatus: false,
             });
-            const result = service.create(tutorial);
+            const result = await service.create(tutorial);
             expect(result).toEqual(expected);
         });
 
         it("should should fail on invalid tutorial", () => {
             const service = new TutorialsService(tutorialsRepositoryMock);
             const tutorial = new Tutorial({});
-            expect(() => service.create(tutorial)).toThrow(BadRequestError);
+            expect(async () => await service.create(tutorial)).rejects.toThrow(
+                IvalidParamsError
+            );
         });
 
         it("should should fail on repo error", () => {
@@ -50,7 +52,9 @@ describe("Tutorials Services", () => {
                 title: "Test title",
                 publishedStatus: false,
             });
-            expect(() => service.create(tutorial)).toThrow(InternalServerError);
+            expect(async () => await service.create(tutorial)).rejects.toThrow(
+                ServerError
+            );
         });
     });
 });
