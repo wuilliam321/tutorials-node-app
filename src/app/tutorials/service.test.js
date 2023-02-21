@@ -1,4 +1,4 @@
-import { Tutorial } from "./tutorial";
+import { Tutorial } from "./model";
 import { TutorialsService } from "./service";
 import { IvalidParamsError, ServerError } from "../shared/errors";
 
