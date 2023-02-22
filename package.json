@@ -12,21 +12,25 @@
     "license": "MIT",
     "scripts": {
         "build": "rimraf dist && babel src -d dist --ignore '**/*.test.js'",
-        "dev": "node ./dist/index",
-        "test": "NODE_ENV=test jest -u --testNamePattern='^(?!.*integration.*).*$'",
+        "dev": "nodemon --exec babel-node src/index.js",
+        "test": "NODE_ENV=test jest -u --testNamePattern='^(?!.*(integration|http).*).*$'",
         "test:integration": "NODE_ENV=test yarn db-migrate:down && NODE_ENV=test yarn db-migrate:up && NODE_ENV=test jest -u -t=integration",
+        "test:http": "NODE_ENV=test jest -u -t=http",
         "db-migrate:up": "sequelize-cli db:migrate",
         "db-migrate:down": "sequelize-cli db:migrate:undo"
     },
     "devDependencies": {
         "@babel/cli": "^7.20.7",
         "@babel/core": "^7.20.12",
+        "@babel/node": "^7.20.7",
         "@babel/preset-env": "^7.20.2",
         "@types/jest": "^29.4.0",
+        "axios": "^1.3.3",
         "babel-jest": "^29.4.3",
         "babel-register": "^6.26.0",
         "eslint": "^8.34.0",
         "jest": "^29.4.3",
+        "nodemon": "^2.0.20",
         "prettier": "^2.8.4",
         "rimraf": "^4.1.2",
         "sequelize-cli": "^6.6.0"
