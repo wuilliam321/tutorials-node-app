@@ -4,8 +4,6 @@ import { ValidationError, ConnectionRefusedError } from "sequelize";
 import { IvalidParamsError, ServerError, UnknownError } from "../shared/errors";
 
 export class TutorialsMySQLRepository {
-    constructor() {}
-
     async save(tutorial) {
         try {
             const result = await TutorialDB.create({

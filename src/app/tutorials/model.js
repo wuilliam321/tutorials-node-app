@@ -20,19 +20,18 @@ export class Tutorial {
     isValid() {
         const { error, value } = tutorialSchema.validate(this);
         if (error) {
-            return false;
+            return { error, value };
         }
 
-        return value;
+        return { value };
     }
 }
 
 const tutorialSchema = Joi.object({
     id: Joi.string().optional(),
     title: Joi.string().required(),
-    publishedStatus: Joi.bool().required(),
+    publishedStatus: Joi.string().required(),
     videoUrl: Joi.string().optional(),
     description: Joi.string().optional(),
     deletedAt: Joi.date().optional(),
 });
-

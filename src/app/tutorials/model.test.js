@@ -5,48 +5,50 @@ describe("tutorial model", () => {
         it("should contain all required fields", () => {
             const tutorial = new Tutorial({
                 title: "a title",
-                publishedStatus: false,
+                publishedStatus: "unpublished",
             });
-            const isValid = tutorial.isValid();
-            expect(isValid).toBeTruthy();
+            const { error, value } = tutorial.isValid();
+            expect(value).toBeTruthy();
+            expect(error).toBeUndefined();
         });
         it("should contain all fields", () => {
             const tutorial = new Tutorial({
                 title: "a title",
-                publishedStatus: false,
+                publishedStatus: "unpublished",
                 videoUrl: "test",
                 description: "test",
                 deletedAt: new Date(),
             });
-            const isValid = tutorial.isValid();
-            expect(isValid).toBeTruthy();
+            const { error, value } = tutorial.isValid();
+            expect(value).toBeTruthy();
+            expect(error).toBeUndefined();
         });
 
         it("should fail on missing required fields", () => {
             const tutorial = new Tutorial({
                 title: "a title",
             });
-            const isValid = tutorial.isValid();
-            expect(isValid).toBeFalsy();
+            const { error } = tutorial.isValid();
+            expect(error).not.toBeNull();
         });
 
         it("should fail on invalid fields", () => {
             const tutorial = new Tutorial({
                 title: 1,
-                publishedStatus: false,
+                publishedStatus: "unpublished",
             });
-            const isValid = tutorial.isValid();
-            expect(isValid).toBeFalsy();
+            const { error } = tutorial.isValid();
+            expect(error).not.toBeNull();
         });
 
         it("verify invalid optional fields", () => {
             const tutorial = new Tutorial({
                 title: "a title",
-                publishedStatus: false,
+                publishedStatus: "unpublished",
                 videoUrl: null,
             });
-            const isValid = tutorial.isValid();
-            expect(isValid).toBeFalsy();
+            const { error } = tutorial.isValid();
+            expect(error).not.toBeNull();
         });
     });
 });

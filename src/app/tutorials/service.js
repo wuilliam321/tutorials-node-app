@@ -7,10 +7,12 @@ export class TutorialsService {
 
     async create(tutorial) {
         try {
-            if (!tutorial.isValid()) {
-                throw new IvalidParamsError("Invalid error");
+            const { error } = tutorial.isValid();
+            if (error) {
+                throw new IvalidParamsError(`invalid fields ${error}`);
             }
-            return await this.tutorialsRepo.save(tutorial);
+            const result = await this.tutorialsRepo.save(tutorial);
+            return result;
         } catch (err) {
             throw err;
         }

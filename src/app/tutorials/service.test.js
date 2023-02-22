@@ -8,7 +8,7 @@ const tutorialsRepositoryMock = {
         new Tutorial({
             id: "1",
             title: "Test title",
-            publishedStatus: false,
+            publishedStatus: "unpublished",
         }),
 };
 
@@ -25,12 +25,12 @@ describe("Tutorials Services", () => {
             const service = new TutorialsService(tutorialsRepositoryMock);
             const tutorial = new Tutorial({
                 title: "Test title",
-                publishedStatus: false,
+                publishedStatus: "unpublished",
             });
             const expected = new Tutorial({
                 id: "1", // hardcoded id
                 title: "Test title",
-                publishedStatus: false,
+                publishedStatus: "unpublished",
             });
             const result = await service.create(tutorial);
             expect(result).toEqual(expected);
@@ -50,7 +50,7 @@ describe("Tutorials Services", () => {
             );
             const tutorial = new Tutorial({
                 title: "Test title",
-                publishedStatus: false,
+                publishedStatus: "unpublished",
             });
             expect(async () => await service.create(tutorial)).rejects.toThrow(
                 ServerError

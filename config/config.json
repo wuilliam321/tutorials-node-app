@@ -5,7 +5,8 @@
         "database": "tutorials",
         "host": "127.0.0.1",
         "port": "3306",
-        "dialect": "mysql"
+        "dialect": "mysql",
+        "logging": false
     },
     "test": {
         "username": "user",
@@ -13,7 +14,8 @@
         "database": "tutorials",
         "host": "127.0.0.1",
         "port": "3307",
-        "dialect": "mysql"
+        "dialect": "mysql",
+        "logging": false
     },
     "production": {
         "username": "user",
