@@ -1,20 +1,20 @@
 export class IvalidParamsError extends Error {
     constructor(message) {
         super(message);
-        this.name = "IvalidParamsError";
+        this.name = this.constructor.name;
     }
 }
 
 export class ServerError extends Error {
     constructor(message) {
         super(message);
-        this.name = "ServerError";
+        this.name = this.constructor.name;
     }
 }
 
 export class UnknownError extends Error {
     constructor(message) {
         super(message);
-        this.name = "UnknownError";
+        this.name = this.constructor.name;
     }
 }

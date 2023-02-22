@@ -79,20 +79,18 @@ describe("API Handlers", () => {
             expect(res.status).toHaveBeenCalledWith(400);
         });
 
-        // it("should create a tutorial", async () => {
-        //     const req = {
-        //         body: validTutorial,
-        //     };
-        //     const res = {
-        //         send: jest.fn(),
-        //         status: jest.fn(),
-        //     };
+        it("should create a tutorial", async () => {
+            const req = {
+                body: validTutorial,
+            };
+            const res = {
+                send: jest.fn(),
+                status: jest.fn(),
+            };
 
-        //     await api.handleCreateTutorial(req, res);
+            await api.handleCreateTutorial(req, res);
 
-        //     expect(deps.tutorialsService.create).toHaveBeenCalledWith(req.body);
-        //     expect(res.send).toHaveBeenCalledWith(validTutorial);
-        //     expect(res.status).toHaveBeenCalledWith(200);
-        // });
+            expect(res.status).toHaveBeenCalledWith(200);
+        });
     });
 });

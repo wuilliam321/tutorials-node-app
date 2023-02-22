@@ -1,4 +1,5 @@
 import Joi from "joi";
+import { IvalidParamsError } from "../shared/errors";
 
 export class Tutorial {
     constructor({
@@ -20,7 +21,7 @@ export class Tutorial {
     isValid() {
         const { error, value } = tutorialSchema.validate(this);
         if (error) {
-            return { error, value };
+            return { error: new IvalidParamsError(error.message), value };
         }
 
         return { value };

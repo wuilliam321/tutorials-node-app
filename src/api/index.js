@@ -1,3 +1,4 @@
+import { IvalidParamsError } from "../app/shared/errors";
 import { Tutorial } from "../app/tutorials/model";
 
 export default class Api {
@@ -7,9 +8,13 @@ export default class Api {
 
     async handleCreateTutorial(req, res) {
         try {
-            if (!req.body) {
+            if (!req.body || Object.keys(req.body).length === 0) {
                 res.status(400);
-                res.send("Bad Request");
+                const err = new IvalidParamsError("no body provided");
+                res.send({
+                    type: err.name,
+                    message: err.message,
+                });
                 return;
             }
 
@@ -19,7 +24,10 @@ export default class Api {
             res.send(result);
         } catch (err) {
             res.status(400);
-            res.send(err);
+            res.send({
+                type: err.name,
+                message: err.message,
+            });
         }
     }
 }
