@@ -1,6 +1,6 @@
 import models from "../../../models";
 import { IvalidParamsError } from "../shared/errors";
-import { Tutorial } from "./model";
+import { Tutorial } from "./models";
 import { TutorialsMySQLRepository } from "./repository";
 
 describe("integration -> Tutorials Repository", () => {

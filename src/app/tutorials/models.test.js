@@ -1,4 +1,4 @@
-import { Tutorial } from "./model";
+import { Tutorial } from "./models";
 
 describe("tutorial model", () => {
     describe("isValid", () => {

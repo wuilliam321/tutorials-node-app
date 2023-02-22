@@ -1,6 +1,6 @@
 import axios from "axios";
 import Api from "./";
-import { Tutorial } from "../app/tutorials/model";
+import { Tutorial } from "../app/tutorials/models";
 import { TutorialsService } from "../app/tutorials/service";
 
 const http = axios.create({

@@ -1,4 +1,4 @@
-import { Tutorial } from "./model";
+import { Tutorial } from "./models";
 import { Tutorial as TutorialDB } from "../../../models";
 import { ValidationError, ConnectionRefusedError } from "sequelize";
 import { IvalidParamsError, ServerError, UnknownError } from "../shared/errors";
