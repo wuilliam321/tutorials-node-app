@@ -36,3 +36,30 @@ const tutorialSchema = Joi.object({
     description: Joi.string().optional(),
     deletedAt: Joi.date().optional(),
 });
+
+export class TutorialFindOptions {
+    constructor(options) {
+        this.filter = (options && options.filter) || {};
+        this.sort = (options && options.sort) || {};
+    }
+
+    isValid() {
+        const { error, value } = tutorialFindOptionsSchema.validate(this);
+        if (error) {
+            return { error: new IvalidParamsError(error.message), value };
+        }
+
+        return { value };
+    }
+}
+
+const tutorialFindOptionsSchema = Joi.object({
+    filter: Joi.object({
+        title: Joi.string().optional(),
+        description: Joi.string().optional(),
+    }).optional(),
+    sort: Joi.object({
+        title: Joi.string().optional(),
+        description: Joi.string().optional(),
+    }).optional(),
+});
