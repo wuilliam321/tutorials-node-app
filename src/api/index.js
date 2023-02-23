@@ -1,5 +1,5 @@
 import { IvalidParamsError } from "../app/shared/errors";
-import { Tutorial } from "../app/tutorials/models";
+import { Tutorial } from "../app/tutorials/models/tutorial";
 
 export default class Api {
     constructor({ tutorialsService }) {

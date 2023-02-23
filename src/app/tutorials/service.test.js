@@ -1,4 +1,5 @@
-import { Tutorial, TutorialFindOptions } from "./models";
+import { Tutorial } from "./models/tutorial";
+import { TutorialFindOptions } from "./models/tutorial_find_options";
 import { TutorialsService } from "./service";
 import { IvalidParamsError, ServerError } from "../shared/errors";
 

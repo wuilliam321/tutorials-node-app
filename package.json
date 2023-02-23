@@ -14,7 +14,7 @@
         "build": "rimraf dist && babel src -d dist --ignore '**/*.test.js'",
         "dev": "nodemon --exec babel-node src/index.js",
         "test": "NODE_ENV=test jest -u --testNamePattern='^(?!.*(integration|http).*).*$'",
-        "test:integration": "NODE_ENV=test yarn db-migrate:down && NODE_ENV=test yarn db-migrate:up && NODE_ENV=test jest -u -t=integration",
+        "test:integration": "NODE_ENV=test jest -u -t=integration",
         "test:http": "NODE_ENV=test jest -u -t=http",
         "db-migrate:up": "sequelize-cli db:migrate",
         "db-migrate:down": "sequelize-cli db:migrate:undo"

@@ -1,5 +1,5 @@
 import { IvalidParamsError } from "../shared/errors";
-import { TutorialFindOptions } from "./models";
+import { TutorialFindOptions } from "./models/tutorial_find_options";
 
 export class TutorialsService {
     constructor(tutorialsRepo) {

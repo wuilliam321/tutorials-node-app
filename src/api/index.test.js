@@ -1,6 +1,8 @@
 import axios from "axios";
 import Api from "./";
-import { Tutorial } from "../app/tutorials/models";
+import { Tutorial } from "../app/tutorials/models/tutorial";
+import models from "../../models";
+import { Tutorial as TutorialDB } from "../../models";
 import { TutorialsService } from "../app/tutorials/service";
 
 const http = axios.create({
@@ -9,6 +11,14 @@ const http = axios.create({
 });
 
 describe("integration -> HTTP API V1", () => {
+    afterAll(() => models.sequelize.close());
+
+    beforeEach(async () => {
+        await TutorialDB.destroy({
+            truncate: true,
+        });
+    });
+
     describe("POST /tutorial", () => {
         it("should create a tutorial", async () => {
             const res = await http.post("/tutorials", {
